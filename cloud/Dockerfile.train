@@ -1,0 +1,37 @@
+# ML Lab Training Container
+# Provides a reproducible training environment for cloud GPU instances.
+#
+# Build:  docker build -f cloud/Dockerfile.train -t ml-lab-train .
+# Run:    docker run --gpus all -v ./experiments/<name>:/workspace ml-lab-train
+
+FROM nvidia/cuda:12.1.1-devel-ubuntu22.04
+
+# Avoid interactive prompts
+ENV DEBIAN_FRONTEND=noninteractive
+
+# System dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    python3.11 python3.11-venv python3.11-dev python3-pip \
+    git curl wget \
+    && rm -rf /var/lib/apt/lists/*
+
+# Set python3.11 as default
+RUN update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.11 1 \
+    && update-alternatives --install /usr/bin/python python /usr/bin/python3.11 1
+
+# Install uv for fast package management
+RUN curl -LsSf https://astral.sh/uv/install.sh | sh
+ENV PATH="/root/.local/bin:$PATH"
+
+WORKDIR /workspace
+
+# Copy scaffold source and install dependencies
+COPY pyproject.toml .
+RUN pip install -e ".[llm]" 2>/dev/null || pip install -e .
+
+# W&B online mode (no Device Guard on Linux)
+ENV WANDB_MODE=online
+
+# Default: run training
+ENTRYPOINT ["python", "-m", "src.train"]
+CMD ["--config", "configs/grpo.yaml"]

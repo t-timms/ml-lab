@@ -1,0 +1,49 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# ML artifacts
+*.pt
+*.pth
+*.safetensors
+*.gguf
+*.bin
+*.onnx
+
+# Experiment data (large files)
+experiments/*/data/
+experiments/*/checkpoints/
+experiments/*/wandb/
+experiments/*/logs/
+experiments/*/.wandb/
+
+# W&B
+wandb/
+
+# Environment
+.env
+.env.*
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Gitignored docs
+experiments/*/EXPERIMENT_GUIDE.md
+
+# Synced runs tracker
+registry/synced_runs.txt

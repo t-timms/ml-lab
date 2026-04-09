@@ -1,0 +1,36 @@
+# Cloud training providers — API keys stored in environment variables, never here.
+#
+# Usage: make cloud-train EXP=2026-04-gsm8k-grpo PROVIDER=runpod GPU=A100_80GB
+
+runpod:
+  api_key_env: RUNPOD_API_KEY
+  default_gpu: "A100_80GB"
+  default_image: "runpod/pytorch:2.3.0-py3.11-cuda12.1.1"
+  ssh_key: ~/.ssh/runpod_rsa
+  sync_exclude:
+    - "checkpoints/"
+    - "wandb/"
+    - "__pycache__/"
+    - ".pytest_cache/"
+    - "*.egg-info/"
+  setup_script: setup_remote.sh
+
+lambda:
+  api_key_env: LAMBDA_API_KEY
+  default_gpu: "A100_80GB"
+  ssh_key: ~/.ssh/lambda_rsa
+  sync_exclude:
+    - "checkpoints/"
+    - "wandb/"
+    - "__pycache__/"
+  setup_script: setup_remote.sh
+
+vast:
+  api_key_env: VASTAI_API_KEY
+  default_gpu: "RTX_4090"
+  ssh_key: ~/.ssh/vast_rsa
+  sync_exclude:
+    - "checkpoints/"
+    - "wandb/"
+    - "__pycache__/"
+  setup_script: setup_remote.sh
