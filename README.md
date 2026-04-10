@@ -4,7 +4,7 @@
 
 <p>ML research control plane — experiment lifecycle, model registry, cloud training launcher</p>
 
-![CI](https://github.com/omnipotence-eth/ml-lab/actions/workflows/ci.yml/badge.svg)
+![CI](https://img.shields.io/github/actions/workflow/status/omnipotence-eth/ml-lab/ci.yml?style=flat-square&label=CI)
 ![Python](https://img.shields.io/badge/Python-3.11+-blue?style=flat-square)
 ![W&B](https://img.shields.io/badge/W%26B-integrated-yellow?style=flat-square)
 ![Ruff](https://img.shields.io/badge/code%20style-ruff-000000?style=flat-square)
