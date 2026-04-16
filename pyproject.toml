@@ -15,7 +15,7 @@ keywords = ["ml", "experiment", "training", "model-registry", "cloud-training"]
 dependencies = [
     "PyYAML>=6.0,<7.0",
     "click>=8.0,<9.0",
-    "rich>=13.0,<15.0",
+    "rich>=13.0,<16.0",
 ]
 
 [project.optional-dependencies]
